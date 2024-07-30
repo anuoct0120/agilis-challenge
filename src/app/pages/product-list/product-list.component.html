@@ -1,0 +1,30 @@
+<!-- Container for listing all products -->
+<div class="product-list">
+  <!-- Iterate over the 'products' array to display each product -->
+  <div *ngFor="let product of products" class="product-item">
+    <!-- Container for the product image -->
+    <div class="product-image" (click)="viewProductDetails(product.id)">
+      <!-- Display the product image if available; otherwise show a placeholder -->
+      <img *ngIf="product.images && product.images.length > 0; else noImage" [src]="product.images[0]" alt="{{ product.title }}">
+      <!-- Template for placeholder image when no product image is available -->
+      <ng-template #noImage>
+        <div class="placeholder">No Image Available</div>
+      </ng-template>
+    </div>
+    <!-- Display the product title -->
+    <h3>{{ product.title }}</h3>
+    <!-- Display the product description -->
+    <p>{{ product.description }}</p>
+    <!-- Display the product price -->
+    <p class="price">${{ product.price }}</p>
+    <!-- Button to add the product to the cart -->
+    <button (click)="addToCart(product)" class="add-item-button" [attr.aria-label]="'Add ' + product.title">
+      <mat-icon>shopping_cart</mat-icon>
+      <span class="visually-hidden">Add {{ product.title }}</span>
+    </button>
+  </div>
+</div>
+
+<!-- Container for handling scroll events (e.g., infinite scroll) -->
+<div (scroll)="onScroll()" class="scroll-container">
+</div>

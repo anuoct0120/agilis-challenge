@@ -1,0 +1,27 @@
+<div *ngIf="productDetails" class="product-details">
+  <div class="product-image">
+    <!-- Display product image if available, otherwise show a placeholder -->
+    <img *ngIf="productDetails.images && productDetails.images.length > 0; else noImage" [src]="productDetails.images[0]" alt="{{ productDetails.title }}">
+    <ng-template #noImage>
+      <div class="placeholder">No Image Available</div>
+    </ng-template>
+  </div>
+  <div class="product-info">
+    <!-- Display product title, description, and price -->
+    <h1>{{ productDetails.title }}</h1>
+    <p>{{ productDetails.description }}</p>
+    <p class="price">${{ productDetails.price }}</p>
+    <!---->
+    <div class="actions">
+      <!-- Add to Cart button with aria-label for accessibility -->
+      <button (click)="addToCart(product)" class="add-to-cart-button">
+        <mat-icon>shopping_cart</mat-icon>
+        Add to Cart
+      </button>
+      <!-- Wishlist button with aria-label for accessibility -->
+      <button class="icon-button" aria-label="Add to wishlist">
+        <i class="fa fa-heart"></i>
+      </button>
+    </div>
+  </div>
+</div>
